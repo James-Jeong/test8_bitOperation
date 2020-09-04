@@ -1,26 +1,24 @@
 #include <stdio.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////
-/// Defintion & Macro
+/// Macros
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // 2진수 변환에 사용될 정수의 비트 수
 #define BIT_NUM 32
-
-// 프로그램 상태 열거형
+// 함수 실행 결과 열거형
 enum STATUS
 {
-	FAIL	= -1,	// 실패
-	UNKNOWN = 0,	// 알 수 없음
-	SUCCESS	= 1		// 성공
+	FAIL	= 0,	// 실패
+	SUCCESS	= 1,	// 성공
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
 /// Predefinitions of Local functions
 ///////////////////////////////////////////////////////////////////////////////////////
 
-void signed32bitsNumberToBinary(const int inputValue);
-void unsigned32bitsNumberToBinary(unsigned const int inputValue);
+void printSigned32bitsNumberToBinary(const int inputValue);
+void printUnsigned32bitsNumberToBinary(unsigned const int inputValue);
 void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber);
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -34,14 +32,13 @@ void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber);
  */
 int main()
 {
-	int signedInputValue = UNKNOWN;
-	unsigned int unsignedInputValue = UNKNOWN;
+	int signedInputValue = 0;
+	unsigned int unsignedInputValue = 0;
 
 	input32bitsNumbers(&signedInputValue, &unsignedInputValue);
 
-	printf("\n");
-	signed32bitsNumberToBinary(signedInputValue);
-	unsigned32bitsNumberToBinary(unsignedInputValue);
+	printSigned32bitsNumberToBinary(signedInputValue);
+	printUnsigned32bitsNumberToBinary(unsignedInputValue);
 
 	return SUCCESS;
 }
@@ -51,12 +48,12 @@ int main()
 ///////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * @fn void signed32bitsNumberToBinary(const int inputValue)
+ * @fn void printSigned32bitsNumberToBinary(const int inputValue)
  * @brief 부호 있는 32 bits 정수를 이진수로 출력하는 함수
- * @param number 입력받을 정수(입력)
+ * @param number 이진수로 출력될 부호 있는 정수(입력)
  * @return 반환값 없음
  */
-void signed32bitsNumberToBinary(const int inputValue)
+void printSigned32bitsNumberToBinary(const int inputValue)
 {
  	int mask = (signed)0x80000000;
 	int loopIndex = 1;
@@ -73,12 +70,12 @@ void signed32bitsNumberToBinary(const int inputValue)
 }
 
 /**
- * @fn void unsigned32bitsNumberToBinary(unsigned const int inputValue)
+ * @fn void printUnsigned32bitsNumberToBinary(unsigned const int inputValue)
  * @brief 부호 없는 32 bits 정수를 이진수로 출력하는 함수
- * @param number 입력받을 정수(입력)
+ * @param number 이진수로 출력될 부호 없는 정수(입력)
  * @return 반환값 없음
  */
-void unsigned32bitsNumberToBinary(unsigned const int inputValue)
+void printUnsigned32bitsNumberToBinary(unsigned const int inputValue)
 {
 	unsigned int mask = 0x80000000;
 	int loopIndex = 1;
@@ -97,8 +94,8 @@ void unsigned32bitsNumberToBinary(unsigned const int inputValue)
 /**
  * @fn void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber)
  * @brief 부호 있는 32 bits 정수와 부호 없는 32 bits 정수를 입력받는 함수
- * @param signedNumber 입력받을 부호 있는 정수(출력)
- * @param unsignedNumber 입력받을 부호 없는 정수(출력)
+ * @param signedNumber 입력받을 부호 있는 정수를 저장하는 변수(출력)
+ * @param unsignedNumber 입력받을 부호 없는 정수를 저장하는 변수(출력)
  * @return 반환값 없음
  */
 void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber)
@@ -113,28 +110,23 @@ void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber)
 	do
 	{
 		printf("부호 있는 32 bit 정수 입력 : ");
-
 		inputResult = scanf(" %d", signedNumber);
 		if( inputResult == FAIL)
 		{
 			printf("입력 오류, 문자열 입력\n");
 			while( getchar() != '\n');
 		}
-	}
-	while(inputResult != SUCCESS);
+	} while(inputResult != SUCCESS);
 
-	inputResult = FAIL;
 	do
 	{
 		printf("부호 없는 32 bit 정수 입력 (양수) : ");
-
 		inputResult = scanf(" %d", unsignedNumber);
 		if( inputResult == FAIL)
 		{
 			printf("입력 오류, 문자열 입력\n");
 			while( getchar() != '\n');
 		}
-	}
-	while(inputResult != SUCCESS);
+	} while(inputResult != SUCCESS);
 }
 
