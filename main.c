@@ -19,8 +19,8 @@ enum STATUS
 /// Predefinitions of Local functions
 ///////////////////////////////////////////////////////////////////////////////////////
 
-void signed32bitsNumberToBinary(int inputValue);
-void unsigned32bitsNumberToBinary(unsigned int inputValue);
+void signed32bitsNumberToBinary(const int inputValue);
+void unsigned32bitsNumberToBinary(unsigned const int inputValue);
 void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber);
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -51,12 +51,12 @@ int main()
 ///////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * @fn void signed32bitsNumberToBinary(int inputValue)
+ * @fn void signed32bitsNumberToBinary(const int inputValue)
  * @brief 부호 있는 32 bits 정수를 이진수로 출력하는 함수
  * @param number 입력받을 정수(입력)
  * @return 반환값 없음
  */
-void signed32bitsNumberToBinary(int inputValue)
+void signed32bitsNumberToBinary(const int inputValue)
 {
  	int mask = (signed)0x80000000;
 	int loopIndex = 1;
@@ -73,12 +73,12 @@ void signed32bitsNumberToBinary(int inputValue)
 }
 
 /**
- * @fn void unsigned32bitsNumberToBinary(unsigned int inputValue)
+ * @fn void unsigned32bitsNumberToBinary(unsigned const int inputValue)
  * @brief 부호 없는 32 bits 정수를 이진수로 출력하는 함수
  * @param number 입력받을 정수(입력)
  * @return 반환값 없음
  */
-void unsigned32bitsNumberToBinary(unsigned int inputValue)
+void unsigned32bitsNumberToBinary(unsigned const int inputValue)
 {
 	unsigned int mask = 0x80000000;
 	int loopIndex = 1;
@@ -95,13 +95,14 @@ void unsigned32bitsNumberToBinary(unsigned int inputValue)
 }
 
 /**
- * @fn void input32bitsNumber( int *number)
- * @brief 32 bits 정수 하나를 입력받는 함수
+ * @fn void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber)
+ * @brief 부호 있는 32 bits 정수와 부호 없는 32 bits 정수를 입력받는 함수
  * @param signedNumber 입력받을 부호 있는 정수(출력)
  * @param unsignedNumber 입력받을 부호 없는 정수(출력)
  * @return 반환값 없음
  */
-void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber){
+void input32bitsNumbers(int *signedNumber, unsigned int *unsignedNumber)
+{
 	if(signedNumber == NULL || unsignedNumber == NULL)
 	{
 		printf("잘못된 정수 변수 참조. NULL. (signedNumber:%p, unsignedNumber:%p)\n", signedNumber, unsignedNumber);
